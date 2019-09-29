@@ -10,4 +10,7 @@ eg:
 `aws configure profile shotty`
 
 ##Running
-`pipenv run python shotty/shotty.py`
+`pipenv run python shotty/shotty.py <command> <--project=Project>`
+
+*command* is list, start or stop
+*project* is optional
