@@ -25,7 +25,9 @@ def shapshots():
 
 @shapshots.command('list')
 @click.option('--project', default=None, help="Only shapshots for project (tag:Project:<name>)")
-def list_shapshots(project):
+@click.option('--all', 'list_all', default=False, is_flag=True,
+help ="List all snapshots for each volume, not just the recent ones")
+def list_shapshots(project, list_all):
     """Lists EC2 shapshots"""
     instances = filter_instances(project)
 
@@ -40,6 +42,8 @@ def list_shapshots(project):
                     s.progress,
                     s.start_time.strftime("%c")
                 )))
+
+                if s.state=='completed' and not list_all: break
     return
 
 @cli.group('volumes')
